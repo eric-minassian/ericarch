@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 hwclock --systohc
 
