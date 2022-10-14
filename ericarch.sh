@@ -7,15 +7,6 @@ read DISK
 echo Enter Swap Size:
 read SWAP
 
-echo Enter Username:
-read USERNAME
-
-echo Enter Password:
-read PASSWORD
-
-echo Enter Hostname:
-read HOSTNAME
-
 # Start Install
 timedatectl set-ntp true
 
@@ -26,7 +17,7 @@ sfdisk -X gpt $DISK <<EOF
 ,,L,
 EOF
 
-mkfs.btrfs $DISK"3"
+mkfs.btrfs $DISK"3" -f
 mkswap $DISK"2"
 mkfs.fat -F 32 $DISK"1"
 
