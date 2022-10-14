@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo Enter Username:
+read USERNAME
+
+echo Enter Hostname:
+read HOSTNAME
+
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 hwclock --systohc
 
