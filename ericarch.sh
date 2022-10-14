@@ -7,6 +7,15 @@ read DISK
 echo Enter Swap Size:
 read SWAP
 
+echo Enter Username:
+read USERNAME
+
+echo Enter Password:
+read PASSWORD
+
+echo Enter Hostname:
+read HOSTNAME
+
 # Start Install
 timedatectl set-ntp true
 
