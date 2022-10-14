@@ -4,8 +4,19 @@ lsblk
 echo Enter Disk:
 read DISK
 
+echo Enter Swap Size:
+read SWAP
+
 # Start Install
 timedatectl set-ntp true
+
+# Partition Drive
+sfdisk -X gpt $DISK <<EOF
+,+500M,U,
+,+$SWAP,S,
+,,L,
+EOF
+
 mkfs.btrfs $DISK"3"
 mkswap $DISK"2"
 mkfs.fat -F 32 $DISK"1"
