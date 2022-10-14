@@ -4,12 +4,6 @@ lsblk
 echo Enter Disk:
 read DISK
 
-echo Enter Username:
-read USERNAME
-
-echo Enter Hostname:
-read HOSTNAME
-
 # Start Install
 timedatectl set-ntp true
 mkfs.btrfs $DISK"3"
