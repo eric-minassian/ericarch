@@ -17,14 +17,13 @@ echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo $HOSTNAME >> /etc/hostname
-passwd
 echo "root:$PASSWORD" | chpasswd
 
 useradd -mG wheel $USERNAME
 echo "$USERNAME:$PASSWORD" | chpasswd
 
 pacman -Syy
-pacman -S networkmanager grub efibootmgr os-prober
+pacman -S networkmanager grub efibootmgr os-prober --noconfirm
 systemctl enable NetworkManager
 systemctl enable lightdm
 echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
