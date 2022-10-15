@@ -58,8 +58,7 @@ echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo $HOSTNAME > /mnt/etc/hostname
 arch-chroot /mnt echo -e "$PASSWORD\n$PASSWORD" | passwd
 
-arch-chroot /mnt useradd -mG wheel $USERNAME
-arch-chroot /mnt echo echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
+arch-chroot /mnt useradd -mG wheel $USERNAME -p $PASSWORD
 
 arch-chroot /mnt pacman -Syy
 arch-chroot /mnt pacman -S networkmanager grub efibootmgr os-prober --noconfirm
