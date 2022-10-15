@@ -41,10 +41,10 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 
 #
-#curl https://raw.githubusercontent.com/eric-minassian/ericarch/main/ericarch-chroot.sh
-#chmod +x ericarch-chroot.sh
-#cp ericarch-chroot.sh /mnt/ericarch-chroot.sh
-#arch-chroot /mnt ./ericarch-chroot.sh
+# curl https://raw.githubusercontent.com/eric-minassian/ericarch/main/ericarch-chroot.sh
+# chmod +x ericarch-chroot.sh
+# cp ericarch-chroot.sh /mnt/ericarch-chroot.sh
+# arch-chroot /mnt ./ericarch-chroot.sh
 #
 
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
@@ -56,10 +56,10 @@ arch-chroot /mnt sed -i 's/^#en_US\.UTF-8/en_US\.UTF-8/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo $HOSTNAME > /mnt/etc/hostname
-arch-chroot /mnt echo $PASSWORD | passwd --stdin
+arch-chroot /mnt echo "root:$PASSWORD" | chpasswd
 
 arch-chroot /mnt useradd -mG wheel $USERNAME
-ararch-chroot /mnt echo $PASSWORD | passwd --stdin $USERNAME
+arch-chroot /mnt echo "$USERNAME:$PASSWORD" | chpasswd
 
 arch-chroot /mnt pacman -Syy
 arch-chroot /mnt pacman -S networkmanager grub efibootmgr os-prober --noconfirm
