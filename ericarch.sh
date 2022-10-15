@@ -10,9 +10,6 @@ read SWAP
 echo Enter Username:
 read USERNAME
 
-echo Enter Password:
-read PASSWORD
-
 echo Enter Hostname:
 read HOSTNAME
 
@@ -56,9 +53,10 @@ arch-chroot /mnt sed -i 's/^#en_US\.UTF-8/en_US\.UTF-8/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo $HOSTNAME > /mnt/etc/hostname
-arch-chroot /mnt echo -e "$PASSWORD\n$PASSWORD" | passwd
+arch-chroot /mnt passwd
 
-arch-chroot /mnt useradd -mG wheel $USERNAME -p $PASSWORD
+arch-chroot /mnt useradd -mG wheel $USERNAME
+arch-chroot /mnt passwd $USERNAME
 
 arch-chroot /mnt pacman -Syy
 arch-chroot /mnt pacman -S networkmanager grub efibootmgr os-prober --noconfirm
