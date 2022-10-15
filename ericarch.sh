@@ -56,18 +56,18 @@ arch-chroot /mnt sed -i 's/^#en_US\.UTF-8/en_US\.UTF-8/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo $HOSTNAME > /mnt/etc/hostname
-arch-chroot /mnt echo "root:$PASSWORD" | chpasswd
+arch-chroot /mnt echo -e "$PASSWORD\n$PASSWORD" | passwd
 
 arch-chroot /mnt useradd -mG wheel $USERNAME
-arch-chroot /mnt echo "$USERNAME:$PASSWORD" | chpasswd
+arch-chroot /mnt echo echo -e "$PASSWORD\n$PASSWORD" | passwd $USERNAME
 
 arch-chroot /mnt pacman -Syy
 arch-chroot /mnt pacman -S networkmanager grub efibootmgr os-prober --noconfirm
 arch-chroot /mnt systemctl enable NetworkManager
 #echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 #echo "GRUB_DISABLE_OS_PROBER=false" >> /etc/default/grub
-arch-chroot /mnt sed -i '#%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL'
-arch-chroot /mnt sed -i '#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false'
+arch-chroot /mnt sed -i '#%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL' /etc/sudoers
+arch-chroot /mnt sed -i '#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false' /etc/default/grub
 
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
