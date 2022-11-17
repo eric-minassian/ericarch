@@ -23,7 +23,7 @@ read HOSTNAME
 timedatectl set-ntp true
 
 
-if [PARTITION = "Y"]
+if [ PARTITION = "Y" ]
 then
     # Create Partitions
     sgdisk --zap-all "$DISK"
