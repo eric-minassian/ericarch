@@ -7,7 +7,7 @@ read DISK
 echo Enter Swap Size:
 read SWAP
 
-echo Partition Drives (Y-Yes, N-No):
+echo Partition Drives Y-Yes N-No:
 read PARTITION
 
 echo Enter Username:
@@ -23,7 +23,7 @@ read HOSTNAME
 timedatectl set-ntp true
 
 
-if [PARTITION = "N"]
+if [PARTITION = "Y"]
 then
     # Create Partitions
     sgdisk --zap-all "$DISK"
