@@ -13,9 +13,6 @@ read PARTITION
 echo Enter Username:
 read USERNAME
 
-echo Enter Password:
-read PASSWORD
-
 echo Enter Hostname:
 read HOSTNAME
 
@@ -62,7 +59,7 @@ HOSTS
 
 # Setup New User
 arch-chroot /mnt useradd -mG wheel $USERNAME
-arch-chroot /mnt echo $USERNAME":"$PASSWORD | chpasswd
+arch-chroot /mnt passwd $USERNAME
 arch-chroot /mnt sed -i 's/#%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 # Setup Bootloader and Network
